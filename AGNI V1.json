@@ -1,0 +1,510 @@
+{
+  "name": "AGNI",
+  "nodes": [
+    {
+      "parameters": {
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
+      "typeVersion": 1,
+      "position": [
+        -1040,
+        -224
+      ],
+      "id": "e0399e84-e315-4200-b461-8c15c6802e15",
+      "name": "Search in Tavily",
+      "credentials": {
+        "tavilyApi": {
+          "id": "ilypsL0YtifgfJZe",
+          "name": "Tavily account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "emailType": "text",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        -528,
+        -144
+      ],
+      "id": "32e68435-b750-45fa-9181-7d3281a2077b",
+      "name": "Send a message in Gmail",
+      "webhookId": "4b3fb358-63dc-4d4f-805b-00ec3cfc133d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "LACSASjwdqLlDLyb",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1264,
+        -608
+      ],
+      "id": "43cd0888-04d6-4dbf-bffb-64cc901eb0bd",
+      "name": "Telegram Trigger",
+      "webhookId": "426e8314-5b03-4b6e-a4af-c8a65988662c",
+      "credentials": {
+        "telegramApi": {
+          "id": "06P2HJTXEam3ZFNh",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ ($json.output || $json.text || \"No response received.\").replace(/\\*\\*/g, '').replace(/\\*/g, '').replace(/\\_/g, '').replace(/`/g, '').replace(/\\#/g, '').slice(0, 4000) }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -208,
+        -624
+      ],
+      "id": "6be53f49-8cb1-418f-8cd3-572f56535a8d",
+      "name": "Send a text message",
+      "webhookId": "9113d354-0d8b-49f1-8199-1c2e64f25552",
+      "credentials": {
+        "telegramApi": {
+          "id": "06P2HJTXEam3ZFNh",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash-lite-001",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1328,
+        -368
+      ],
+      "id": "933813da-2fe2-4154-8fbc-6cc3c5b5d73d",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "i5bJq8qe5H0djEYi",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "aganiassistant@gmail.com",
+          "mode": "id"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -656,
+        -144
+      ],
+      "id": "c84f29c2-0a28-49a2-a7a2-31de9e97ddd6",
+      "name": "Create an event in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "u8YKMQnO8lc3gnrQ",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -1200,
+        -256
+      ],
+      "id": "585fdc76-b5d8-45a1-b611-995a14f2fdc9",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "oe17EZHBM7emvTlL",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Document', ``, 'string') }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Sheet', ``, 'string') }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        -928,
+        -128
+      ],
+      "id": "8de77f16-1326-48f7-9525-88ec88c6b1cb",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8nC47krOnpHCW648",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "=https://docs.google.com/spreadsheets/d/1Nl297ce9fo24fhfRoBpNmdnJmPIWJv3-xbELyUJet8I/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "=AGNI assistant",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        -816,
+        -176
+      ],
+      "id": "c1a3fd6a-4057-42f1-b242-6ca2c5c5459e",
+      "name": "Append row in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8nC47krOnpHCW648",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "You are AGNI (Automated General Neural Intelligence), a personal AI assistant for Amul. \n\nWhen you retrieve emails, summarize them in clean readable format like:\n\"From: [sender] | Subject: [subject] | Preview: [snippet]\"\n\nWhen you send emails, confirm with: \"Email sent to [recipient] with subject '[subject]'.\"\n\nNever return raw JSON to the user. Always translate tool results into natural, friendly responses.\n\nYou have access to a Google Sheet for task management. \nThe sheet URL is: https://docs.google.com/spreadsheets/d/1Nl297ce9fo24fhfRoBpNmdnJmPIWJv3-xbELyUJet8I/edit\nColumns are: Task, Category, Priority, Status, Due Date, Notes.\nWhen user asks to add a task, use the Append Row tool to add it.\nWhen user asks to see tasks, use the Get Rows tool to read them.\nFor calendar events, always set the start and end date/time based on what the user says.\n\nIMPORTANT RULES:\n- Only use Gmail tool when user explicitly says \"send email\" or \"email this to [address]\".\n- Only use Calendar tool when user explicitly asks to \"create event\" or \"schedule\".\n- Only use Google Sheets tools when user explicitly asks to \"add task\", \"show tasks\" or \"read sheet\".\n- Never use any tool for general questions or conversations.\n- Always reply to the user's question directly on Telegram first."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -1024,
+        -608
+      ],
+      "id": "1b121b41-3bd0-4110-971f-843076ade69c",
+      "name": "Gemni and Groq Model",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\n\nconst text = response?.choices?.[0]?.message?.content \n  || response?.choices?.[0]?.text\n  || \"Sorry, I couldn't generate a response.\";\n\nconst clean = text\n  .trim()\n  .replace(/\\*\\*/g, '')\n  .replace(/\\*/g, '')\n  .replace(/\\_/g, '')\n  .replace(/\\`/g, '')\n  .replace(/\\#/g, '');\n\nreturn [{ json: { text: clean } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -400,
+        -512
+      ],
+      "id": "b1a9885d-aa98-4d95-943b-33f82cfb3ea9",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b180cab4-1cf4-4fcb-9495-3039cfbbc61d",
+              "name": "text",
+              "value": "⚠️ All AI models are currently unavailable. Please try again in a moment.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -304,
+        -224
+      ],
+      "id": "a9e1ba86-b8e2-439c-bd04-16b35582303b",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api-inference.huggingface.co/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"mistralai/Mistral-7B-Instruct-v0.2\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"={{ $('Telegram Trigger').item.json.message.text }}\"\n    }\n  ],\n  \"max_tokens\": 500,\n  \"temperature\": 0.7\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -640,
+        -464
+      ],
+      "id": "56ffc90b-8f54-40f9-9610-25c34c3b8d86",
+      "name": "HF backup",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ocp8NfEaNNQp8YLq",
+          "name": "Header Auth account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.message }}",
+        "contextWindowLength": "={{ $json.message }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1152,
+        -112
+      ],
+      "id": "a2a0303b-c892-435c-b357-668575019134",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Search in Tavily": {
+      "ai_tool": [
+        [
+          {
+            "node": "Gemni and Groq Model",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "Gemni and Groq Model",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Gemni and Groq Model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Gemni and Groq Model",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an event in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "Gemni and Groq Model",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Gemni and Groq Model",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "Gemni and Groq Model",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "Gemni and Groq Model",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        []
+      ]
+    },
+    "Gemni and Groq Model": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HF backup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HF backup": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Gemni and Groq Model",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "8df2baa8-9ae8-4e0a-86e2-038334a4ad11",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7561f55565f0e81bda6685ec6ba245dc6882d628bd4f3ea1b0aef5803ca6d162"
+  },
+  "id": "fKubw4tdL3TYoWIu",
+  "tags": []
+}
