@@ -1,59 +1,62 @@
-
 # 🔥 AGNI v1 – Automated General Neural Intelligence
 
-**AGNI v1 is a modular AI automation system that connects user input, multi-model reasoning, memory, and external tools into a single workflow.**  
-It turns messages (e.g., from Telegram) into intelligent, context-aware actions and responses.
+**AGNI v1 is a modular AI automation system that connects user input, multi-model reasoning, memory, and external tools into a unified workflow.**
+
+It transforms simple messages (via Telegram) into intelligent, context-aware actions and responses.
 
 ---
 
 ## 🚀 What problem this solves
 
-Most AI demos stop at chat. AGNI goes further:
-- Takes real input (Telegram)
-- Decides what to do (multi-model reasoning)
-- Uses tools (Sheets, Gmail, Calendar)
-- Returns results automatically
+Most AI systems stop at generating responses.  
+AGNI goes further by:
 
-Result: **an AI that doesn’t just answer — it acts.**
+- Accepting real-world input (Telegram)
+- Performing reasoning using multiple AI models
+- Executing actions through integrated tools
+- Delivering results automatically
 
----
-
-## 🧠 How it works (at a glance)
-
-1. **Input Layer** – Telegram message triggers the system  
-2. **AI Engine** – Gemini + Groq handle reasoning  
-3. **Memory Layer** – Stores context for better responses  
-4. **Tool Layer** – Executes actions (Sheets, Gmail, Calendar, Search)  
-5. **Fallback** – Hugging Face backup if needed  
-6. **Output Layer** – Sends response back to Telegram  
+Result: **an AI system that doesn’t just respond — it acts.**
 
 ---
 
-## 📸 Workflow Architecture
+## 🧠 How it works
 
-![AGNI Workflow](AGNI V1.png)
+AGNI follows a structured pipeline:
 
-AGNI integrates multi-model AI reasoning, memory, and automation tools into a unified pipeline.
+1. **Input Layer**  
+   Receives user queries via Telegram  
 
----
+2. **AI Engine**  
+   Multi-model reasoning using Gemini and Groq  
 
-## 📲 Live Interaction (Telegram)
+3. **Memory Layer**  
+   Maintains context for improved responses  
 
-![AGNI Telegram Response](Final Image .jpeg)
+4. **Tool Layer**  
+   Executes actions using:
+   - Google Sheets  
+   - Gmail  
+   - Google Calendar  
+   - Search (Tavily)  
 
-AGNI responding in real time to user queries via Telegram, demonstrating context-aware AI + automation.
+5. **Fallback Layer**  
+   Uses Hugging Face APIs for reliability  
+
+6. **Output Layer**  
+   Sends responses back to the user via Telegram  
 
 ---
 
 ## 🧩 Key Features
 
-- Multi-model AI (Gemini + Groq)
-- Real-time interaction via Telegram
-- Memory-enabled responses
-- Tool execution (Google Sheets, Gmail, Calendar)
-- Search integration (Tavily)
-- Fallback reliability (Hugging Face)
-- Modular and extensible design
+- Multi-model AI orchestration (Gemini + Groq)  
+- Real-time interaction through Telegram  
+- Context-aware responses with memory  
+- Integration with productivity tools  
+- Automated task execution  
+- Fallback handling for reliability  
+- Modular and extensible architecture  
 
 ---
 
